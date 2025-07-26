@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escape Room: Cyber Shield Challenge</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://www.techfunnel.com/wp-content/uploads/2022/02/types-of-hackers.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    h1 {
+      margin-bottom: 20px;
+      color : #8833a1;
+    }
+    .question-box {
+      display: none;
+    }
+    .question-box.active {
+      display: block;
+    }
+    button {
+      background-color: #8833a1;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #2b1430;
+    }
+    .result {
+      display: none;
+      font-size: 24px;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+    .hint {
+      color: #ff6666;
+      margin-top: 10px;
+    }
+    .hacker-msg {
+      margin-top: 10px;
+      color: #ff4444;
+      font-weight: bold;
+      display: none;
+    }
+    #login-box {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<div class="container" id="login-box">
+  <h1>🔐 Escape Room Login</h1>
+  <input type="text" id="username" placeholder="Username" /><br><br>
+  <input type="password" id="password" placeholder="Password" /><br><br>
+  <button onclick="login()">Login</button>
+  <div id="login-error" style="color: red; margin-top: 10px;"></div>
+</div>
+
+<div class="container" id="quiz-box" style="display:none;">
+  <h1>Cyber Escape Room Challenge</h1>
+  <div id="questions"></div>
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+  const users = {
+    'hari': 'pwd123',
+    'sabi2006': 'pwd123',
+    'meena2003': 'pwd123',
+    'tej1' : 'pwd123'
+    
+  };
+  let currentUser = '';
+  const answers = ['c','c','b','c','b','c','c','c','c','b'];
+  const points = Array(10).fill(0);
+  const responses = [];
+
+  function login() {
+    const u = document.getElementById('username').value;
+    const p = document.getElementById('password').value;
+    if (localStorage.getItem('attempted_' + u)) {
+      document.getElementById('login-error').innerText = 'You have already attempted the quiz.';
+      return;
+    }
+    if (users[u] && users[u] === p) {
+      currentUser = u;
+      document.getElementById('login-box').style.display = 'none';
+      document.getElementById('quiz-box').style.display = 'block';
+      loadQuestions();
+    } else {
+      document.getElementById('login-error').innerText = 'Invalid username or password';
+    }
+  }
+
+  function loadQuestions() {
+    const questions = [
+      "What is phishing?",
+      "What does HTTPS indicate on a website URL?",
+      "What is the safest way to create passwords?",
+      "Which of these is a form of malware?",
+      "What should you do if you receive a suspicious email link?",
+      "Which of the following is a strong password?",
+      "What does a firewall do?",
+      "What is two-factor authentication (2FA)?",
+      "What is ransomware?",
+      "What is the best way to protect your accounts?"
+    ];
+    const options = [
+      ['A. A fishing technique','B. A method of securing websites','C. A scam to steal personal data'], 
+      ['A. Hacker Type Protocol Secure','B. Hyper Transfer Process Speed','C. Secure connection (SSL/TLS)'],
+      ['A. Use your birth date','B. Use a mix of letters, numbers, and symbols','C. Use the word "password"'],
+      ['A. HTML','B. VPN','C. Trojan Horse'],
+      ['A. Click it to see what happens','B. Do not click and report it','C. Forward it to your friends'],
+      ['A. 123456','B. abcdef','C. 8u!K$z@1'],
+      ['A. Enhances screen brightness','B. Deletes your files','C. Blocks unauthorized access'],
+      ['A. Logging in from two devices','B. Using two passwords at once','C. Extra security with a code + password'],
+      ['A. A free game software','B. A tool for improving RAM','C. Malware that locks files for ransom'],
+      ['A. Write passwords on paper','B. Use strong passwords & 2FA','C. Share passwords with friends']
+    ];
+
+    const container = document.getElementById('questions');
+    container.innerHTML = '';
+    for (let i = 0; i < 10; i++) {
+      const box = document.createElement('div');
+      box.className = 'question-box';
+      box.id = 'q' + i;
+      if (i === 0) box.classList.add('active');
+      box.innerHTML = `<p>${i + 1}. ${questions[i]}</p>` +
+        options[i].map((opt, idx) => `<button onclick="checkAnswer(${i}, '${String.fromCharCode(97 + idx)}', '${opt}')">${opt}</button>`).join('');
+      container.appendChild(box);
+    }
+  }
+
+  function checkAnswer(qIndex, selected, text) {
+    const correct = answers[qIndex];
+    const box = document.getElementById('q' + qIndex);
+    const resultBox = document.getElementById('result');
+    const isCorrect = selected === correct;
+
+    responses.push({ question: qIndex + 1, selected: text, correct: isCorrect });
+    if (isCorrect) {
+      points[qIndex] = 1;
+      box.classList.remove('active');
+      const next = document.getElementById('q' + (qIndex + 1));
+      if (next) {
+        next.classList.add('active');
+      } else {
+        resultBox.style.display = 'block';
+        resultBox.innerHTML = `🎉 Congratulations! You've escaped from the Hacker Room!<br>Final Score: ${points.reduce((a,b)=>a+b,0)}/10`;
+        saveCSV();
+      }
+    } else {
+      box.classList.remove('active');
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `❌ Better luck next time!<br>Final Score: ${points.reduce((a,b)=>a+b,0)}/10`;
+      saveCSV();
+    }
+  }
+
+  function saveCSV() {
+    const score = points.reduce((sum, val) => sum + val, 0);
+    const fileName = `user_result_${currentUser}.csv`;
+    let content = 'Question,Selected Answer,Correct\n';
+    responses.forEach(r => {
+      content += `${r.question},"${r.selected}",${r.correct ? 'Yes' : 'No'}\n`;
+    });
+    content += `Total Score,${score}/10`;
+
+    const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = fileName;
+    a.click();
+
+    // Mark user as attempted
+    localStorage.setItem('attempted_' + currentUser, 'true');
+  }
+</script>
+</body>
+</html>
