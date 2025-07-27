@@ -25,6 +25,7 @@
     h1 {
       margin-bottom: 20px;
       color : #8833a1;
+      font-family: 'Times New Roman';
     }
     .question-box {
       display: none;
@@ -32,13 +33,20 @@
     .question-box.active {
       display: block;
     }
+    .question-text{
+        text-align: left;
+        font-size: 20px;
+        font-family: 'Times New Roman';
+        line-height: 40px;
+    }
     button {
       background-color: #8833a1;
       color: white;
       border: none;
       padding: 10px 20px;
       margin: 10px;
-      font-size: 16px;
+      font-size: 18px;
+      font-family: 'Times New Roman';
       border-radius: 5px;
       cursor: pointer;
       transition: 0.3s;
@@ -50,11 +58,13 @@
       display: none;
       font-size: 24px;
       font-weight: bold;
-      color: #00ffcc;
+      color: #f3e7ed;
     }
     .hint {
-      color: #ff6666;
+      color: #17ea4f;
       margin-top: 10px;
+      font-family: 'Times New Roman';
+      font-size: 20px;
     }
     .hacker-msg {
       margin-top: 10px;
@@ -64,6 +74,12 @@
     }
     #login-box {
       display: block;
+    }
+    .result{
+      font-family: 'Times New Roman';
+     color: #ffffff; 
+  
+
     }
   </style>
 </head>
@@ -87,11 +103,11 @@
     'hari': 'pwd123',
     'sabi2006': 'pwd123',
     'meena2003': 'pwd123',
-    'tej1' : 'pwd123'
+    'o4' : 'pwd123'
     
   };
   let currentUser = '';
-  const answers = ['c','c','b','c','b','c','c','c','c','b'];
+  const answers = ['c','c','b','c','b','c','a','b','a','b'];
   const points = Array(10).fill(0);
   const responses = [];
 
@@ -114,29 +130,31 @@
 
   function loadQuestions() {
     const questions = [
-      "What is phishing?",
-      "What does HTTPS indicate on a website URL?",
-      "What is the safest way to create passwords?",
-      "Which of these is a form of malware?",
-      "What should you do if you receive a suspicious email link?",
-      "Which of the following is a strong password?",
-      "What does a firewall do?",
-      "What is two-factor authentication (2FA)?",
-      "What is ransomware?",
-      "What is the best way to protect your accounts?"
+      "There’s a locked PC. On the monitor, a sticky note reads:'Pet + PIN = Password'. <br> On the desk:A dog photo labeled: Tommy.<br> A post-it stuck under the mousepad with: 2684 <br> <b style= 'color : #a64ca6';> Question : What is the password?</b>",
+      "Inside the Recycle Bin, there's a file named: img.jpeg.lnk . <br> When opened, it redirects to a text document that says: ,<br>“Too lazy to rename. Find me in disguise.” <br>  <b style= 'color : #a64ca6';> Question : What’s suspicious about the file?</b>",
+      "There’s a zip file named 'Backup.zip' that asks for a password.<br> <b style= 'color : #a64ca6';> Question : Based on the previous password (Tommy2684) and the hint, what’s the stronger version?</b><br> Your college is “SRIT”.",
+      "You open the browser history. A site called gamefan.com shows a login with the same password. <br> <b style= 'color : #a64ca6';> Question : What mistake did the user make?</b>",
+      "After highlighting the page, you find: “Open the folder Downloads, <br>then check the file with .bak extension.” <br> <b style= 'color : #a64ca6';>  Question : What type of file is this?</b>",
+      "You open the email app. There are 5 saved drafts.<br> Draft #3 has a strange line : “This is what most users ignore. Fix it before someone exploits it.” <br> <b style= 'color : #a64ca6';> Question : What security feature is often ignored but could have prevented the alert? </b>",
+      "The inbox shows a new email with the subject : 'Urgent: Your Account Will Be Locked!' <br> The message urges : 'Click this link and log in to confirm your identity.'<br> The sender's address is security-update@netfix-support.com. <br> <b style= 'color : #a64ca6';> Question : What’s the red flag in the email? </br>",
+      "You check the Downloads folder and find a file calledn : “SecureApp_Setup.exe” You open it, but nothing happens. Suddenly, the webcam light turns on by itself.<br> <b style= 'color : #a64ca6';> Question : What’s going wrong here? <b>",
+      "Clicking the shortcut shows a list of running apps. One stands out : “System Helper” — it’s using a lot of internet even when nothing is open. <br> <b style= 'color : #a64ca6';>  Question : What should you do first to stop the spying?</b>",
+      "To exit : Follo the link below <br> http://escapefromtheroom.com? <br> <b style= 'color : #a64ca6';> Question : Enter the Habit that protects your System ?</b> "//To exit, follow the link below <br> http://escapefromtheroom.com <br> <b style= 'color : #a64ca6';> Enter the habit that protects your System.</b>
     ];
     const options = [
-      ['A. A fishing technique','B. A method of securing websites','C. A scam to steal personal data'], 
-      ['A. Hacker Type Protocol Secure','B. Hyper Transfer Process Speed','C. Secure connection (SSL/TLS)'],
-      ['A. Use your birth date','B. Use a mix of letters, numbers, and symbols','C. Use the word "password"'],
-      ['A. HTML','B. VPN','C. Trojan Horse'],
-      ['A. Click it to see what happens','B. Do not click and report it','C. Forward it to your friends'],
-      ['A. 123456','B. abcdef','C. 8u!K$z@1'],
-      ['A. Enhances screen brightness','B. Deletes your files','C. Blocks unauthorized access'],
-      ['A. Logging in from two devices','B. Using two passwords at once','C. Extra security with a code + password'],
-      ['A. A free game software','B. A tool for improving RAM','C. Malware that locks files for ransom'],
-      ['A. Write passwords on paper','B. Use strong passwords & 2FA','C. Share passwords with friends']
-    ];
+      ['A. 2684Tommy ','B. Tommy2024 ','C.Tommy2684'], 
+      ['A. It’s a compressed photo with a double extension','B.  It’s just a Windows thumbnail — nothing to worry about ','C. It’s a shortcut, not an image — possibly hiding a file'],
+      ['A. 2684Tommy@srit','B. Tommy2684#SRIT','C. Backup#TommySRIT'],
+      ['A. Saved the game login in browser bookmarks','B. Played games on a non-encrypted website','C. Reused the same password for a non-secure gaming site.'],
+      ['A. A temporary browser cache file — safe to ignore  ','B.  .bak is a backup file — often overlooked but contains sensitive data','C. A broken archive file — usually created when downloads fail'],
+      ['A. Dual-Network Handshake Protocol','B. Clearing Browser History','C. Two-Factor Authentication (2FA)'],
+      ['A. The sender’s email is fake — it’s not from the real Netflix domain.','B. The email uses an official-looking domain — which means it’s safe ','C. The link says "Click here" instead of using your name — it’s a marketing email.'],
+      ['A. The app is updating your webcam drivers — that’s normal behavior.','B. You installed a fake app — someone may now be watching your screen and camera.','C. The installation triggered your system’s camera test protocol'],
+      ['A. Turn off the internet (Wi-Fi) right away to stop data from being sent.','B. Close the app and hope it stops','C. Give it some time — maybe it’s doing an update'],
+      ['A. Click the link and Escape immediately ','B. No I wont click — This could be a Trap ','C. Report the link — helps others avoid the threat and alerts security teams']
+   ];
+
+    
 
     const container = document.getElementById('questions');
     container.innerHTML = '';
@@ -145,7 +163,7 @@
       box.className = 'question-box';
       box.id = 'q' + i;
       if (i === 0) box.classList.add('active');
-      box.innerHTML = `<p>${i + 1}. ${questions[i]}</p>` +
+      box.innerHTML = `<p class="question-text">${i + 1}. ${questions[i]}</p>` +
         options[i].map((opt, idx) => `<button onclick="checkAnswer(${i}, '${String.fromCharCode(97 + idx)}', '${opt}')">${opt}</button>`).join('');
       container.appendChild(box);
     }
@@ -158,21 +176,49 @@
     const isCorrect = selected === correct;
 
     responses.push({ question: qIndex + 1, selected: text, correct: isCorrect });
+    
+    const clues = [
+    "🗝️ Clue: After login, there’s a desktop file named secretfile.txt that says: 'Look inside the Recycle Bin... it’s not really trash.”",
+    "🗝️ Clue: The text document contains: “The password you used earlier was weak. Try the stronger version by adding # and your college short name.”",
+    "🗝️ Clue: Clue inside zip file : A note appears : “This password was reused somewhere else. Find where.”",
+    "🗝️ Clue: The site now shows a “403 Forbidden” page — with a hidden message in white font. “Highlight to see the truth.”",
+    "🗝️ Clue: When opened, it shows a list of email drafts with a final clue : “Check email draft #3 .”",
+    "🗝️ Clue: Right after, an alert shows : “Security notice: Suspicious activity detected. Email from netfix-support.com flagged.”",
+    "🗝️ Clue: You hover over the link — it points to : http://netfix123.co/login A warning flashes on the screen : “Fake link detected. Downloaded file may be dangerous. Check your recent downloads.”",
+    "🗝️ Clue: A message pops up : 'You gave them control. Can you take it back?' A shortcut appears on the desktop : 'End the spy'",
+   "🗝️ Clue: When you switch off Wi-Fi, the strange app closes. A new file appears called : “Final_Lock.txt” It says : 'This is your last step. Click the link to Escape'",
+   " GREAT CHOICE! : Avoid http — is not safe and is not encrypted. So easily the Hackers can intercept or modify your data."
+  ];
+
     if (isCorrect) {
       points[qIndex] = 1;
+
+      // Show clue below the current question
+    const clueEl = document.createElement('p');
+    clueEl.className = 'hint';
+    clueEl.innerText = clues[qIndex];
+    box.appendChild(clueEl);
+
+    setTimeout(() => 
+    {
       box.classList.remove('active');
       const next = document.getElementById('q' + (qIndex + 1));
       if (next) {
         next.classList.add('active');
       } else {
         resultBox.style.display = 'block';
-        resultBox.innerHTML = `🎉 Congratulations! You've escaped from the Hacker Room!<br>Final Score: ${points.reduce((a,b)=>a+b,0)}/10`;
+        resultBox.innerHTML = `🎊 Congratulations! You escaped the traps, cracked the clues, and beat the hacker at their own game! 🎊 <br>
+         In the hacker’s game, hesitation can be your greatest defense.<br>Escaping wasn’t about speed 🏃— it was about knowing when not to click <br>
+         ⚠️ Some traps are just one click away. Today, you walked away instead. <br> <b style = "color : violet;"> Mission Outcome: ${points.reduce((a,b)=>a+b,0)}/10</b>`;
         saveCSV();
       }
-    } else {
+    },15000);
+
+    } 
+    else {
       box.classList.remove('active');
       resultBox.style.display = 'block';
-      resultBox.innerHTML = `❌ Better luck next time!<br>Final Score: ${points.reduce((a,b)=>a+b,0)}/10`;
+      resultBox.innerHTML = `❌ The Hacker redirects you out...Better luck next time!<br>Final Score: ${points.reduce((a,b)=>a+b,0)}/10`;
       saveCSV();
     }
   }
