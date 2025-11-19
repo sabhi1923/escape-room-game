@@ -84,6 +84,20 @@
   </style>
 </head>
 <body>
+
+<audio id="bg-music" loop>
+  <source src="assets\audio\cyber-storm.mp3"  type="audio/mpeg">
+</audio>
+
+<audio id="fail-music">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="win-music">
+  <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3?utm_source=chatgpt.com" type="audio/mpeg">
+</audio>
+
+
 <div class="container" id="login-box">
   <h1>🔐 Escape Room Login</h1>
   <input type="text" id="username" placeholder="Username" /><br><br>
@@ -99,11 +113,12 @@
 </div>
 
 <script>
+               
   const users = {
     'hari': 'pwd123',
     'sabi2006': 'pwd123',
     'meena2003': 'pwd123',
-    'o5' : 'pwd123'
+    'ham3' : 'pwd123'
     
   };
   let currentUser = '';
@@ -123,6 +138,7 @@
       document.getElementById('login-box').style.display = 'none';
       document.getElementById('quiz-box').style.display = 'block';
       loadQuestions();
+       document.getElementById("bg-music").play().catch(()=>{});
     } else {
       document.getElementById('login-error').innerText = 'Invalid username or password';
     }
@@ -210,7 +226,13 @@
         resultBox.innerHTML = `🎊 Congratulations! You escaped the traps, cracked the clues, and beat the hacker at their own game! 🎊 <br>
          In the hacker’s game, hesitation can be your greatest defense.<br>Escaping wasn’t about speed 🏃— it was about knowing when not to click <br>
          ⚠️ Some traps are just one click away. Today, you walked away instead. <br> <b style = "color : violet;"> Mission Outcome: ${points.reduce((a,b)=>a+b,0)}/10</b>`;
-        saveCSV();
+        
+         document.getElementById("bg-music").pause();
+  document.getElementById("bg-music").currentTime = 0;
+
+  document.getElementById("win-music").play().catch(()=>{});
+
+         saveCSV();
       }
     },15000);
 
@@ -219,6 +241,12 @@
       box.classList.remove('active');
       resultBox.style.display = 'block';
       resultBox.innerHTML = `❌ The Hacker redirects you out...Better luck next time!<br>Final Score: ${points.reduce((a,b)=>a+b,0)}/10`;
+     
+      document.getElementById("bg-music").pause();
+  document.getElementById("bg-music").currentTime = 0;
+
+  document.getElementById("fail-music").play().catch(()=>{});
+
       saveCSV();
     }
   }
@@ -244,3 +272,25 @@
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
