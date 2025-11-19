@@ -63,7 +63,27 @@
      </style>
     </head>
     <body>
-        <h1> ESCAPE PROTOCOL </h1>
+
+    <audio id="bgMusic" preload="auto" loop>
+    <!-- Use a local file like music.mp3 or your own URL -->
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Try to play on load (works in most browsers after a user click navigation)
+    const audio = document.getElementById('bgMusic');
+    audio.play().catch(() => {
+      // If blocked, enable one-time click anywhere to start
+      const startOnClick = () => {
+        audio.play().finally(() => {
+          document.removeEventListener('click', startOnClick, { once: true });
+        });
+      };
+      document.addEventListener('click', startOnClick, { once: true });
+    });
+  </script>
+
+        <h1> ESCAPE PROTOCOLS </h1>
         <h2> Read Before You Begin </h2>
         <div class="instructions">
         <p> 1. Once logged in, you'll find yourself locked inside a virtual escape room.</p><br>
@@ -76,7 +96,7 @@
        
         
         </div>
-            <button><a href="page3.html"> START </a></button>
+            <button><a href="rough3.html"> START </a></button>
         
     </body>
 </html>
