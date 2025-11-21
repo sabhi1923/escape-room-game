@@ -26,26 +26,29 @@
       margin-bottom: 20px;
       color : #8833a1;
       font-family: 'Times New Roman';
+      font-size: 50px;
+      text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
     }
     .question-box {
       display: none;
     }
     .question-box.active {
       display: block;
+      
     }
     .question-text{
         text-align: left;
-        font-size: 20px;
+        font-size: 23px;
         font-family: 'Times New Roman';
         line-height: 40px;
     }
     button {
-      background-color: #8833a1;
+      background-color: #6b2581;
       color: white;
       border: none;
       padding: 10px 20px;
       margin: 10px;
-      font-size: 18px;
+      font-size: 20px;
       font-family: 'Times New Roman';
       border-radius: 5px;
       cursor: pointer;
@@ -56,7 +59,7 @@
     }
     .result {
       display: none;
-      font-size: 24px;
+      font-size: 25px;
       font-weight: bold;
       color: #f3e7ed;
     }
@@ -64,7 +67,7 @@
       color: #17ea4f;
       margin-top: 10px;
       font-family: 'Times New Roman';
-      font-size: 20px;
+      font-size: 22px;
     }
     .hacker-msg {
       margin-top: 10px;
@@ -77,7 +80,7 @@
     }
     .result{
       font-family: 'Times New Roman';
-     color: #ffffff; 
+     color: skyblue; 
   
 
     }
@@ -86,15 +89,15 @@
 <body>
 
 <audio id="bg-music" loop>
-  <source src="cyber-horror.mp3"  type="audio/mpeg">
+  <source src="assets\audio\cyber-horror.mp3"  type="audio/mpeg">
 </audio>
 
 <audio id="fail-music">
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  <source src="assets\audio\cyber-loss_msg.mp3" type="audio/mpeg">
 </audio>
 
 <audio id="win-music">
-  <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3?utm_source=chatgpt.com" type="audio/mpeg">
+  <source src="assets\audio\cyber-win_msg.mp3" type="audio/mpeg">
 </audio>
 
 
@@ -115,10 +118,10 @@
 <script>
                
   const users = {
-    'hari23': 'pwd123',
-    'sabi08': 'pwd123',
+    'hari007': 'pwd123',
+    'sabi19': 'pwd123',
     'meena16': 'pwd123',
-    'ham21 : 'pwd123'
+    'ham21' : 'pwd123'
     
   };
   let currentUser = '';
@@ -146,16 +149,16 @@
 
   function loadQuestions() {
     const questions = [
-      "There’s a locked PC. On the monitor, a sticky note reads:'Pet + PIN = Password'. <br> On the desk:A dog photo labeled: Tommy.<br> A post-it stuck under the mousepad with: 2684 <br> <b style= 'color : #a64ca6';> Question : What is the password?</b>",
-      "Inside the Recycle Bin, there's a file named: img.jpeg.lnk . <br> When opened, it redirects to a text document that says: ,<br>“Too lazy to rename. Find me in disguise.” <br>  <b style= 'color : #a64ca6';> Question : What’s suspicious about the file?</b>",
-      "There’s a zip file named 'Backup.zip' that asks for a password.<br> <b style= 'color : #a64ca6';> Question : Based on the previous password (Tommy2684) and the hint, what’s the stronger version?</b><br> Your college is “SRIT”.",
-      "You open the browser history. A site called gamefan.com shows a login with the same password. <br> <b style= 'color : #a64ca6';> Question : What mistake did the user make?</b>",
-      "After highlighting the page, you find: “Open the folder Downloads, <br>then check the file with .bak extension.” <br> <b style= 'color : #a64ca6';>  Question : What type of file is this?</b>",
-      "You open the email app. There are 5 saved drafts.<br> Draft #3 has a strange line : “This is what most users ignore. Fix it before someone exploits it.” <br> <b style= 'color : #a64ca6';> Question : What security feature is often ignored but could have prevented the alert? </b>",
-      "The inbox shows a new email with the subject : 'Urgent: Your Account Will Be Locked!' <br> The message urges : 'Click this link and log in to confirm your identity.'<br> The sender's address is security-update@netfix-support.com. <br> <b style= 'color : #a64ca6';> Question : What’s the red flag in the email? </br>",
-      "You check the Downloads folder and find a file calledn : “SecureApp_Setup.exe” You open it, but nothing happens. Suddenly, the webcam light turns on by itself.<br> <b style= 'color : #a64ca6';> Question : What’s going wrong here? <b>",
-      "Clicking the shortcut shows a list of running apps. One stands out : “System Helper” — it’s using a lot of internet even when nothing is open. <br> <b style= 'color : #a64ca6';>  Question : What should you do first to stop the spying?</b>",
-      "To exit : Follo the link below <br> http://escapefromtheroom.com? <br> <b style= 'color : #a64ca6';> Question : Enter the Habit that protects your System ?</b> "//To exit, follow the link below <br> http://escapefromtheroom.com <br> <b style= 'color : #a64ca6';> Enter the habit that protects your System.</b>
+      "There’s a locked PC. On the monitor, a sticky note reads:<br><b>'Pet + PIN = Password'. </b><br> On the desk:A dog photo labeled: Tommy.<br> A post-it stuck under the mousepad with: 2684 <br><center> <b style= 'color : #8833a1; font-family: Times New Roman; font-size: 30px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;';> Question : What is the password?</center></b>",
+      "Inside the Recycle Bin, there's a file named: <b>img.jpeg.lnk</b> . <br> When opened, it redirects to a text document that says: ,<br>“<b>Too lazy to rename. Find me in disguise.” </b><br> <center> <b style= 'color : #8833a1; font-family: Times New Roman; font-size: 30px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;';> Question : What’s suspicious about the file?</center></b>",
+      "There’s a zip file named <b>'Backup.zip'</b> that asks for a password.<br>Your college is “SRIT”.<br> <center> <b style= 'color : #8833a1; font-family: Times New Roman; font-size: 30px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;';> Question : Based on the previous password (Tommy2684) and the hint, what’s the stronger version?</center></b><br> ",
+      "You open the browser history. A site called <b>'gamefan.com'</b> shows a login with the same password. <br> <center> <b style= 'color : #8833a1; font-family: Times New Roman; font-size: 30px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;';> Question : What mistake did the user make?</center></b>",
+      "After highlighting the page, you find: <b>“Open the folder Downloads</b>, <br>then check the file with <b>.bak extension.</b>” <br> <center> <b style= 'color : #8833a1; font-family: Times New Roman; font-size: 30px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;';>  Question : What type of file is this?</center></b>",
+      "You open the email app. There are 5 saved drafts.<br> Draft #3 has a strange line : <b>“This is what most users ignore. Fix it before someone exploits it.”</b> <br> <center><b style= 'color : #8833a1; font-family: Times New Roman; font-size: 30px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;';> Question : What security feature is often ignored but could have prevented the alert? </center></b>",
+      "The inbox shows a new email with the subject :<b> 'Urgent: Your Account Will Be Locked!' <br> The message urges : 'Click this link and log in to confirm your identity.'</b><br> The sender's address is security-update@netfix-support.com. <br> <center> <b style= 'color : #8833a1; font-family: Times New Roman; font-size: 30px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;';> Question : What’s the red flag in the email? </center></b>",
+      "You check the Downloads folder and find a file calledn : <b>“SecureApp_Setup.exe”</b> You open it, but nothing happens. Suddenly, the webcam light turns on by itself.<br><center> <b style= 'color : #8833a1; font-family: Times New Roman; font-size: 30px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;';> Question : What’s going wrong here? </center></b>",
+      "Clicking the shortcut shows a list of running apps. One stands out : <b>“System Helper”</b> — it’s using a lot of internet even when nothing is open. <br> <center> <b style= 'color : #8833a1; font-family: Times New Roman; font-size: 30px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;';>  Question : What should you do first to stop the spying?</center></b>",
+      "To exit : Follo the link below <b><br> http://escapefromtheroom.com? <br></b> <center> <b style= 'color : #8833a1; font-family: Times New Roman; font-size: 30px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;';> Question : Choose the Habit that protects your System ? </center></b> "//To exit, follow the link below <br> http://escapefromtheroom.com <br> <center> <b style= 'color : #8833a1; font-family: Times New Roman; font-size: 30px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;';> Enter the habit that protects your System.</b>
     ];
     const options = [
       ['A. 2684Tommy ','B. Tommy2024 ','C.Tommy2684'], 
@@ -223,9 +226,8 @@
         next.classList.add('active');
       } else {
         resultBox.style.display = 'block';
-        resultBox.innerHTML = `🎊 Congratulations! You escaped the traps, cracked the clues, and beat the hacker at their own game! 🎊 <br>
-         In the hacker’s game, hesitation can be your greatest defense.<br>Escaping wasn’t about speed 🏃— it was about knowing when not to click <br>
-         ⚠️ Some traps are just one click away. Today, you walked away instead. <br> <b style = "color : violet;"> Mission Outcome: ${points.reduce((a,b)=>a+b,0)}/10</b>`;
+        resultBox.innerHTML = `🎊 CONGRATULATIONS! 🎊<br><br> ✨ You escaped the Traps ✨<br><br>✨ Cracked the Clues ✨<br><br> and <br><br> ✨ Beat the Hacker at their own game! ✨  <br>
+        <br> <br> <b style = "color : #17ea4f;"> Mission Outcome: ${points.reduce((a,b)=>a+b,0)}/10</b>`;
         
          document.getElementById("bg-music").pause();
   document.getElementById("bg-music").currentTime = 0;
@@ -234,13 +236,13 @@
 
          saveCSV();
       }
-    },15000);
-
+    },110);
+//15000
     } 
     else {
       box.classList.remove('active');
       resultBox.style.display = 'block';
-      resultBox.innerHTML = `❌ The Hacker redirects you out...Better luck next time!<br>Final Score: ${points.reduce((a,b)=>a+b,0)}/10`;
+      resultBox.innerHTML = `⚠️<br><br><b style = "color :  red;"> YOU GOT TRACED!<br><br> 💀 The Hacker redirects you out 💀...</b><br><br><b style = "color : skyblue;">Mission Outcome: ${points.reduce((a,b)=>a+b,0)}/10</b>`;
      
       document.getElementById("bg-music").pause();
   document.getElementById("bg-music").currentTime = 0;
@@ -272,5 +274,4 @@
 </script>
 </body>
 </html>
-
 
